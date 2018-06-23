@@ -8,6 +8,9 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ChipsModule } from 'primeng/primeng';
+import { ChartModule } from 'primeng/chart';
+
+import { DataProvider } from './services/data.provider';
 
 @NgModule({
     declarations: [
@@ -16,6 +19,7 @@ import { ChipsModule } from 'primeng/primeng';
         HomeComponent
     ],
     imports: [
+        ChartModule,
         ChipsModule,
         CommonModule,
         HttpModule,
@@ -25,6 +29,9 @@ import { ChipsModule } from 'primeng/primeng';
             { path: 'home', component: HomeComponent },
             { path: '**', redirectTo: 'home' }
         ])
+    ],
+    providers: [
+        DataProvider
     ]
 })
 export class AppModuleShared {
