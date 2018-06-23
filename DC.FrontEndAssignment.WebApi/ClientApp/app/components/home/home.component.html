@@ -1,2 +1,5 @@
 <h3 class="first">Basic</h3>
 <p-chips [(ngModel)]="values1" ></p-chips>
+<p-chart *ngIf="getAggResByYear" type="bar" [data]="getAggResByYear"></p-chart>
+
+<p-chart type="line" *ngIf="averageIndexedLTFVByYear" [data]="averageIndexedLTFVByYear" (onDataSelect)="selectData($event)"></p-chart>
