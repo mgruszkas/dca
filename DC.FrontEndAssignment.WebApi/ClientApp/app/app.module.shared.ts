@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { FilteringComponent } from './components/filtering/filtering.component';
 import { ChipsModule } from 'primeng/primeng';
 import { ChartModule } from 'primeng/chart';
 
@@ -17,7 +18,8 @@ import { DataProvider, ComunicationProvider } from './services/index'
     declarations: [
         AppComponent,
         NavMenuComponent,
-        HomeComponent
+        HomeComponent,
+        FilteringComponent
     ],
     imports: [
         ChartModule,

@@ -58,26 +58,4 @@
             text-overflow: ellipsis;
         }
     }  
-    
-    .available-kpis, .pre-defined-helpers {
-        padding: 5px;
-        .btn-light, .btn-warning {
-            font-size: 0.7em;
-            margin: 2px;
-            padding: 6px 8px;
-        }
-    }
-
-    .custom-value {
-        padding: 5px;
-        input {
-            width: calc(100% - 60px);
-            display: inline;
-            height: 30px;;
-        }
-        button.btn-success {
-            width: 50px;
-            padding: 4px 8px;
-        }
-    }
 }

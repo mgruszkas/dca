@@ -12,7 +12,8 @@ export interface IChartDataSet {
 
 export interface IChartData {
   labels: string[];
-  datasets: IChartDataSet[]
+  datasets: IChartDataSet[];
+  availableFilters?: string[];
 }
 
 
@@ -25,35 +26,15 @@ export class DataProvider {
   }
 
   public async getAvgPropertyValue(filters: IFilter[] = []): Promise<IChartData> {
-    //let years = await this.getAvailableYears();
     return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
   public async getAggResByYear(filters: IFilter[] = []): Promise<IChartData> {
-    //let years = await this.getAvailableYears();
     return this.getAggregatedResultByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
-  public getAvailableYears(reload = false): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      if (this._availableYears.length && !reload) {
-        resolve(this._availableYears);
-      } else {
-        this.getAverageOriginalPropertyValueByYear().subscribe((data: any[]) => {
-          data.map((e) => {
-            this._availableYears.push(e.loanOriginationYear);
-          });
-          resolve(this._availableYears);
-        }, (error => reject(error)));
-      }
-    });
-  }
-
-  public getAvailableKPIs(): Promise<any> {
-    return this.getAggregatedResultByYear().map( (d) => {
-      let translated = this.translateData(d,[]);
-      return Object.keys(translated);
-    }).toPromise();
+  public async getAvgIndLTFVByYear(filters: IFilter[] = []): Promise<IChartData> {
+    return this.getAverageIndexedLTFVByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
   private getAggregatedResult(): Observable<any> {
@@ -105,7 +86,8 @@ private  getDataSet(keyIndex, filters: IFilter[], input: any): IChartData {
 
     return {
         labels: indexes,
-        datasets: dataSets
+        datasets: dataSets,
+        availableFilters: Object.keys(data).concat(keyIndex)
     }
   }
 }

@@ -1,0 +1,12 @@
+<div>
+  <div class="available-kpis">
+    <button *ngFor="let kpi of kpis" (click)="addFilter(kpi)" type="button" class="btn btn-light">{{ kpi.value }}</button>
+  </div>
+  <div class="pre-defined-helpers">
+      <button *ngFor="let helper of preDefinedHelpers" (click)="addFilter(helper)" type="button" class="btn btn-warning">{{ helper.value }}</button>
+  </div>
+  <div class="custom-value">
+      <input type="number" class="form-control" [(ngModel)]="customValue" placeholder="add value" />
+      <button *ngIf="customValue" type="button" (click)="addCustomValue()" class="btn btn-success">OK</button>
+  </div>
+</div>

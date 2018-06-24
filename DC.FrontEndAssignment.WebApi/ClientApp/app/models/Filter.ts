@@ -9,6 +9,11 @@ export interface IFilter {
   value: any;
 };
 
+export const DEMO_FILTERS: IFilter[] = [
+  {type: FILTER_TYPE.FILTER, value: 'loanOriginationYear'},
+  {type: FILTER_TYPE.HELPER, value: '>'},
+  {type: FILTER_TYPE.VALUE, value: 1997}
+];
 
 export const PRE_DEFINED_FILTER_HELPERS: IFilter[] = [
   { type: FILTER_TYPE.HELPER, value: '('}, 

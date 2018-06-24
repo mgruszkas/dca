@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider, IChartData, IChartDataSet, ComunicationProvider } from './../../services/index';
-import { FILTER_TYPE, IFilter, Filter, FilterValidator } from './../../models/index';
+import { FILTER_TYPE, IFilter, Filter, FilterValidator, DEMO_FILTERS } from './../../models/index';
 
 
 @Component({
@@ -11,6 +11,7 @@ import { FILTER_TYPE, IFilter, Filter, FilterValidator } from './../../models/in
 export class HomeComponent implements OnInit{
     public getAggResByYear: IChartData = null;
     public averageIndexedLTFVByYear: IChartData = null;
+    public avgIndLTFVByYear: IChartData = null;
     public availableKPIs: IFilter[] = [];
     public filters: any[] = [];
     public validator = new FilterValidator();
@@ -18,9 +19,7 @@ export class HomeComponent implements OnInit{
     constructor(private data: DataProvider, private comunicationProvider: ComunicationProvider){
         this.comunicationProvider.addFilter.subscribe( (filter) => {
             this.filters.push(filter);
-            
             this.valid = this.validator.validateRule(this.filters);
-            console.log('result ', this.valid);
             if (this.valid) {
                 this.getData(this.filters); 
             }
@@ -28,18 +27,13 @@ export class HomeComponent implements OnInit{
     }
 
     public async ngOnInit() {
-       await this.getData();
-
-        this.data.getAvailableKPIs().then( d => {
-            this.availableKPIs = d.map( (kpi) => {
-                return new Filter({ 
-                    type: FILTER_TYPE.FILTER,
-                    value: kpi
-                } as IFilter);
-            });
-            this.comunicationProvider.kpis.next(this.availableKPIs);
-        });
+        this.prepareDemoFilters();
+        await this.getData(this.filters);
         
+    }
+
+    public prepareDemoFilters(): void {
+        this.filters = DEMO_FILTERS.map( d => new Filter(d));
     }
 
     public onRemove(): void {
@@ -56,9 +50,14 @@ export class HomeComponent implements OnInit{
 
     public async getData(filters: IFilter[] = []) {
         this.getAggResByYear = await this.data.getAggResByYear(filters);
-        this.averageIndexedLTFVByYear = await this.data.getAvgPropertyValue(filters);
-
-        console.log(this.getAggResByYear, this.averageIndexedLTFVByYear);
+        
+        this.availableKPIs = this.getAggResByYear.availableFilters.map( (kpi) => {
+            return new Filter({ 
+                type: FILTER_TYPE.FILTER,
+                value: kpi
+            } as IFilter);
+        });
+        this.comunicationProvider.kpis.next(this.availableKPIs);
     }
     
 }
