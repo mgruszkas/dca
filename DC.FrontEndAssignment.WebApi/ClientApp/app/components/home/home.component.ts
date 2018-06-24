@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit{
 
     public async ngOnInit() {
         this.prepareDemoFilters();
-        await this.getData(this.filters);
+        await this.getData('', this.filters);
         
     }
 
