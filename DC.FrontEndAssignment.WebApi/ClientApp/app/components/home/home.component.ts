@@ -18,6 +18,11 @@ export class HomeComponent implements OnInit{
     public validator = new FilterValidator();
     public valid: boolean = true;
     public chartDoShow: string = DEFAULT_CHART;
+    public chartConfig = {
+        legend: {
+            position: 'bottom'
+        }
+    };
     constructor(private data: DataProvider, private comunicationProvider: ComunicationProvider, private route: ActivatedRoute, private router: Router){
         this.comunicationProvider.addFilter.subscribe( (filter) => {
             this.filters.push(filter);
@@ -56,7 +61,7 @@ export class HomeComponent implements OnInit{
 
     public onAdd(item): void {
         // disable cusom text
-        this.filters = this.filters.splice(0, 1);
+        this.filters.pop()
     }
 
     public async getData(chartToShow, filters: IFilter[] = []) {

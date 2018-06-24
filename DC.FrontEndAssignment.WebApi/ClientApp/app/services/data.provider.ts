@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { IFilter, FilterValidator } from './../models/index';
+import { IFilter, FilterValidator, Color } from './../models/index';
 
 export interface IChartDataSet {
   label: string;
@@ -84,6 +84,7 @@ private  getDataSet(keyIndex, filters: IFilter[], input: any): IChartData {
     Object.keys(data).forEach( (e) => {
         dataSets.push({
             label: e,
+            backgroundColor: Color.getNext(),
             data: data[e]
         });
     })
