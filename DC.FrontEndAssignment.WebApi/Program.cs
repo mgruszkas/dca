@@ -11,7 +11,7 @@ namespace DC.FrontEndAssignment.WebApi
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>()
                 .Build();
     }
