@@ -1,8 +1,11 @@
-﻿using DC.FrontEndAssignment.WebApi.Data;
+﻿using System.Threading.Tasks;
+using DC.FrontEndAssignment.WebApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ElectronNET.API;
+using ElectronNET.API.Entities;
 
 namespace DC.FrontEndAssignment.WebApi
 {
@@ -43,6 +46,8 @@ namespace DC.FrontEndAssignment.WebApi
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
         }
     }
 }

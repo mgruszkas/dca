@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using ElectronNET.API;
+using ElectronNET.API.Entities;
 
 namespace DC.FrontEndAssignment.WebApi
 {
@@ -12,6 +14,7 @@ namespace DC.FrontEndAssignment.WebApi
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder()
+                .UseElectron(args)
                 .UseStartup<Startup>()
                 .Build();
     }
