@@ -1,3 +1,3 @@
 <h4 class="first">Chart details</h4>
 <p-chips (onAdd)="onAdd($event)" placeholder="Use left menu buttons" (onRemove)="onRemove()" [ngClass]="{'invalid': !valid}" [(ngModel)]="filters"></p-chips>
-<p-chart [options]="chartConfig" *ngIf="chartData" type="bar" [data]="chartData"></p-chart>
+<p-chart [options]="chartConfig" height="80vh" *ngIf="chartData" type="bar" [data]="chartData"></p-chart>
