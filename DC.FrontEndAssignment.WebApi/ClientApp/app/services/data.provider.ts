@@ -25,13 +25,13 @@ export class DataProvider {
   }
 
   public async getAvgPropertyValue(filters: IFilter[] = []): Promise<IChartData> {
-    let years = await this.getAvailableYears();
-    return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet(years, filters, d)).toPromise();
+    //let years = await this.getAvailableYears();
+    return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
   public async getAggResByYear(filters: IFilter[] = []): Promise<IChartData> {
-    let years = await this.getAvailableYears();
-    return this.getAggregatedResultByYear().map( (d) => this.getDataSet(years, filters, d)).toPromise();
+    //let years = await this.getAvailableYears();
+    return this.getAggregatedResultByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
   public getAvailableYears(reload = false): Promise<any> {
@@ -90,9 +90,11 @@ export class DataProvider {
     return returnObj;
 }
 
-private  getDataSet(years, filters: IFilter[], input: any): IChartData {
+private  getDataSet(keyIndex, filters: IFilter[], input: any): IChartData {
     let data = this.translateData(input, filters);
     let dataSets: IChartDataSet[] = [];
+    let indexes: any[] = data[keyIndex];
+    delete data[keyIndex];
 
     Object.keys(data).forEach( (e) => {
         dataSets.push({
@@ -102,7 +104,7 @@ private  getDataSet(years, filters: IFilter[], input: any): IChartData {
     })
 
     return {
-        labels: years,
+        labels: indexes,
         datasets: dataSets
     }
   }
