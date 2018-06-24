@@ -5,6 +5,35 @@ export class FilterValidator {
 
   }
 
+  public validate(input: any, filters: IFilter[]): boolean {
+    let outputString = '';
+    filters.map( (filter) => {
+      switch(filter.type) {
+        case FILTER_TYPE.HELPER:
+          outputString += ` ${filter.value} `;
+        break;
+
+        case FILTER_TYPE.FILTER:
+          if (input.hasOwnProperty(filter.value)) {
+            outputString += ` ${input[filter.value]} `;
+          } else {
+            outputString += ' 1 ';
+          }
+          break;
+
+        case FILTER_TYPE.VALUE:
+          outputString += filter.value;
+      }
+    });
+
+    try {
+      console.log('output value', outputString);
+      return eval(outputString);
+    } catch(e) {
+      return false;
+    }
+  }
+
   public validateRule(filters: IFilter[]): boolean {
     if (filters.length === 1) {
       return false;

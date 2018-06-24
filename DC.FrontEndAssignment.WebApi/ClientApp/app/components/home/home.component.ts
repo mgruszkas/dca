@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit{
             
             this.valid = this.validator.validateRule(this.filters);
             console.log('result ', this.valid);
+            if (this.valid) {
+                this.getData(this.filters); 
+            }
         });
     }
 
@@ -41,6 +44,9 @@ export class HomeComponent implements OnInit{
 
     public onRemove(): void {
         this.valid = this.validator.validateRule(this.filters);
+        if (this.valid) {
+            this.getData(this.filters);
+        }
     }
 
     public onAdd(item): void {
@@ -48,9 +54,9 @@ export class HomeComponent implements OnInit{
         this.filters = this.filters.splice(0, 1);
     }
 
-    public async getData() {
-        this.getAggResByYear = await this.data.getAggResByYear();
-        this.averageIndexedLTFVByYear = await this.data.getAvgPropertyValue();
+    public async getData(filters: IFilter[] = []) {
+        this.getAggResByYear = await this.data.getAggResByYear(filters);
+        this.averageIndexedLTFVByYear = await this.data.getAvgPropertyValue(filters);
 
         console.log(this.getAggResByYear, this.averageIndexedLTFVByYear);
     }

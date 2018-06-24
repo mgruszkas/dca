@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { IFilter, FilterValidator } from './../models/index';
 
 export interface IChartDataSet {
   label: string;
@@ -17,20 +18,20 @@ export interface IChartData {
 
 @Injectable()
 export class DataProvider {
-  
+  private validator = new FilterValidator();
   private _availableYears: number[] = [];
   constructor(private http: Http) {
 
   }
 
-  public async getAvgPropertyValue(): Promise<IChartData> {
+  public async getAvgPropertyValue(filters: IFilter[] = []): Promise<IChartData> {
     let years = await this.getAvailableYears();
-    return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet(years, d)).toPromise();
+    return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet(years, filters, d)).toPromise();
   }
 
-  public async getAggResByYear(): Promise<IChartData> {
+  public async getAggResByYear(filters: IFilter[] = []): Promise<IChartData> {
     let years = await this.getAvailableYears();
-    return this.getAggregatedResultByYear().map( (d) => this.getDataSet(years, d)).toPromise();
+    return this.getAggregatedResultByYear().map( (d) => this.getDataSet(years, filters, d)).toPromise();
   }
 
   public getAvailableYears(reload = false): Promise<any> {
@@ -50,7 +51,7 @@ export class DataProvider {
 
   public getAvailableKPIs(): Promise<any> {
     return this.getAggregatedResultByYear().map( (d) => {
-      let translated = this.translateData(d);
+      let translated = this.translateData(d,[]);
       return Object.keys(translated);
     }).toPromise();
   }
@@ -71,9 +72,14 @@ export class DataProvider {
     return this.http.get(`/api/averageOriginalPropertyValueByYear`).map(data => data.json());
   }
 
-  private translateData(input: any[]) {
+  private translateData(input: any[], filters: IFilter[]) {
     let returnObj: Object = {};
     input.map( (e, i) => {
+        if (filters.length) {
+          if (!this.validator.validate(e, filters)){
+            return;
+          }
+        }
         Object.keys(e).map( (key) => {
             if(!returnObj.hasOwnProperty(key)) {
                 returnObj[key] = [];
@@ -84,8 +90,8 @@ export class DataProvider {
     return returnObj;
 }
 
-private  getDataSet(years, input: any): IChartData {
-    let data = this.translateData(input);
+private  getDataSet(years, filters: IFilter[], input: any): IChartData {
+    let data = this.translateData(input, filters);
     let dataSets: IChartDataSet[] = [];
 
     Object.keys(data).forEach( (e) => {
