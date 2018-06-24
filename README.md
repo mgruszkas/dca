@@ -51,3 +51,5 @@ dotnet run bin/Debug/netcoreapp2.0/publish/DC.FrontEndAssignment.WebApi.dll
  |- HomeController.cs - SPA Fallback /index/home<br>
  |- TestScenarioController.cs - REST API /api/* <br>
 
+## ShowCase
+<img src="img/out2.gif" />
