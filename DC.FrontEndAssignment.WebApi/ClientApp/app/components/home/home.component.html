@@ -1,3 +1,3 @@
-<h3 class="first">Custom Filtering</h3>
-<p-chips (onAdd)="onAdd($event)" (onRemove)="onRemove()" [ngClass]="{'invalid': !valid}" [(ngModel)]="filters"></p-chips>
-<p-chart *ngIf="getAggResByYear" type="bar" [data]="getAggResByYear"></p-chart>
+<h4 class="first">Chart details</h4>
+<p-chips (onAdd)="onAdd($event)" placeholder="Use left menu buttons" (onRemove)="onRemove()" [ngClass]="{'invalid': !valid}" [(ngModel)]="filters"></p-chips>
+<p-chart *ngIf="chartData" type="bar" [data]="chartData"></p-chart>

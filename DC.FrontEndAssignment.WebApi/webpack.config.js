@@ -7,7 +7,6 @@ const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 module.exports = (env) => {
     // Configuration in common to both client-side and server-side bundles
     const isDevBuild = !(env && env.prod);
-    console.log('------------------------is dev build', isDevBuild);
     const sharedConfig = {
         stats: { modules: false },
         context: __dirname,

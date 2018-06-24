@@ -27,7 +27,6 @@ export class FilterValidator {
     });
 
     try {
-      console.log('output value', outputString);
       return eval(outputString);
     } catch(e) {
       return false;

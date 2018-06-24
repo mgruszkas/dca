@@ -30,6 +30,7 @@ import { DataProvider, ComunicationProvider } from './services/index'
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
+            { path: 'home/:chart', component: HomeComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

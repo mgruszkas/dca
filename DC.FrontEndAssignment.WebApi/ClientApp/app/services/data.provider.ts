@@ -25,8 +25,8 @@ export class DataProvider {
 
   }
 
-  public async getAvgPropertyValue(filters: IFilter[] = []): Promise<IChartData> {
-    return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
+  public async getAggregatedRes(filters: IFilter[] = []): Promise<IChartData> {
+    return this.getAggregatedResult().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
   public async getAggResByYear(filters: IFilter[] = []): Promise<IChartData> {
@@ -35,6 +35,10 @@ export class DataProvider {
 
   public async getAvgIndLTFVByYear(filters: IFilter[] = []): Promise<IChartData> {
     return this.getAverageIndexedLTFVByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
+  }
+
+  public async getAvgOrigPropValByYear(filters: IFilter[] = []): Promise<IChartData> {
+    return this.getAverageOriginalPropertyValueByYear().map( (d) => this.getDataSet('loanOriginationYear', filters, d)).toPromise();
   }
 
   private getAggregatedResult(): Observable<any> {
