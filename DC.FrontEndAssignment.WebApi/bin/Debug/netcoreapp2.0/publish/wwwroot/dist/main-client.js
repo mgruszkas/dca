@@ -2220,7 +2220,7 @@ module.exports = "<div class=\"filters\">\n  <div class=\"available-kpis\">\n   
 /* 29 */
 /***/ (function(module, exports) {
 
-module.exports = "<h4 class=\"first\">Chart details</h4>\r\n<p-chips (onAdd)=\"onAdd($event)\" placeholder=\"Use left menu buttons\" (onRemove)=\"onRemove()\" [ngClass]=\"{'invalid': !valid}\" [(ngModel)]=\"filters\"></p-chips>\r\n<p-chart [options]=\"chartConfig\" *ngIf=\"chartData\" type=\"bar\" [data]=\"chartData\"></p-chart>\r\n";
+module.exports = "<h4 class=\"first\">Chart details</h4>\r\n<p-chips (onAdd)=\"onAdd($event)\" placeholder=\"Use left menu buttons\" (onRemove)=\"onRemove()\" [ngClass]=\"{'invalid': !valid}\" [(ngModel)]=\"filters\"></p-chips>\r\n<p-chart [options]=\"chartConfig\" height=\"80vh\" *ngIf=\"chartData\" type=\"bar\" [data]=\"chartData\"></p-chart>\r\n";
 
 /***/ }),
 /* 30 */
