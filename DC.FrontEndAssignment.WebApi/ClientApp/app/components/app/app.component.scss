@@ -6,3 +6,35 @@
         padding-top: 50px;
     }
 }
+
+:host {
+    /deep/ p-chips {
+        &.invalid {
+            .ui-inputtext {
+                
+                border: 1px solid red;
+                background: rgba(255, 0,0,0.4);
+            
+            }
+        }
+        .ui-chips-token {
+            background: rgba(24, 107, 160, 0.7);
+            .ui-chips-token-icon {
+                display: none;
+            }
+            .ui-chips-token-label {
+                margin-right: 0px;
+            }
+            &:hover {
+                .ui-chips-token-icon {
+                    display: block;
+                }
+
+                .ui-chips-token-label {
+                    margin-right: 2em;
+                }
+            }
+        }
+    
+    }
+}

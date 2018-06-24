@@ -48,6 +48,13 @@ export class DataProvider {
     });
   }
 
+  public getAvailableKPIs(): Promise<any> {
+    return this.getAggregatedResultByYear().map( (d) => {
+      let translated = this.translateData(d);
+      return Object.keys(translated);
+    }).toPromise();
+  }
+
   private getAggregatedResult(): Observable<any> {
     return this.http.get(`/api/aggregatedResult`).map(data => data.json());
   }

@@ -10,7 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ChipsModule } from 'primeng/primeng';
 import { ChartModule } from 'primeng/chart';
 
-import { DataProvider } from './services/data.provider';
+//providers
+import { DataProvider, ComunicationProvider } from './services/index'
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { DataProvider } from './services/data.provider';
         ])
     ],
     providers: [
-        DataProvider
+        DataProvider,
+        ComunicationProvider
     ]
 })
 export class AppModuleShared {

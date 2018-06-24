@@ -11,7 +11,28 @@
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
-            
+            <ul class='nav navbar-nav'>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/home']">
+                        <span class='glyphicon glyphicon-home'></span> Home
+                    </a>
+                    <div class="available-kpis">
+                        <button *ngFor="let kpi of kpis" (click)="addFilter(kpi)" type="button" class="btn btn-light">{{ kpi.value }}</button>
+                    </div>
+                    <div class="pre-defined-helpers">
+                        <button *ngFor="let helper of preDefinedHelpers" (click)="addFilter(helper)" type="button" class="btn btn-warning">{{ helper.value }}</button>
+                    </div>
+                    <div class="custom-value">
+                        <input type="number" class="form-control" [(ngModel)]="customValue" placeholder="add value" />
+                        <button *ngIf="customValue" type="button" (click)="addCustomValue()" class="btn btn-success">OK</button>
+                    </div>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/counter']">
+                        <span class='glyphicon glyphicon-education'></span> Counter
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
